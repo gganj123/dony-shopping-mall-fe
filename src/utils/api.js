@@ -3,7 +3,7 @@ import axios from "axios";
 // console.log("proxy", BACKEND_PROXY);
 const api = axios.create({
   baseURL:
-    process.env.REACT_APP_PROD_BACKEND || process.env.REACT_APP_LOCAL_BACKEND,
+    process.env.REACT_APP_BACKEND_PROXY || process.env.REACT_APP_LOCAL_BACKEND,
   headers: {
     "Content-Type": "application/json",
     authorization: `Bearer ${sessionStorage.getItem("token")}`,
