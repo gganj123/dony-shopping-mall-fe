@@ -114,7 +114,7 @@ const RegisterPage = () => {
           />
         </Form.Group>
         <Button variant="danger" type="submit">
-          회원가입
+          Create Account
         </Button>
       </Form>
     </Container>

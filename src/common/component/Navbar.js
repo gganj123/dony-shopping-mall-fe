@@ -124,7 +124,7 @@ const Navbar = ({ user }) => {
 
       <div className="nav-logo">
         <Link to="/">
-          <img width={100} src="/image/hm-logo.png" alt="hm-logo.png" />
+          <img width={250} src="/image/dony-logo.png" alt="dony-logo.png" />
         </Link>
       </div>
       <div className="nav-menu-area">
