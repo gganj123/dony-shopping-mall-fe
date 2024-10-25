@@ -26,7 +26,7 @@ const Login = () => {
     if (loginError) {
       dispatch(clearErrors());
     }
-  }, [loginError, dispatch]);
+  }, [dispatch]);
 
   const handleLoginWithEmail = (event) => {
     event.preventDefault();
