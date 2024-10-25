@@ -113,7 +113,7 @@ const userSlice = createSlice({
           "로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요";
       })
       .addCase(loginWithToken.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload.data;
       });
   },
 });
