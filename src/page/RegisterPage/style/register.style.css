@@ -31,6 +31,7 @@
 }
 
 .register-area .btn-danger {
+  border-radius: 25px;
   font-weight: bold;
   background-color: #d2a679;
   border-color: #d2a679;
@@ -50,4 +51,12 @@
   background-color: #b5835e;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
   transform: translateY(1px);
+}
+
+.text-align-center p {
+  color: #d2a679;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
 }

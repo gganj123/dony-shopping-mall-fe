@@ -1,15 +1,80 @@
-.login-button-area{
-    align-items: center;
+.login-button-area {
+  align-items: center;
 }
 
-.login-form{
-    width: 100%;
-      
-  }
-  .login-area{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 550px;
-  }
+.login-form {
+  width: 100%;
+}
+.login-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 550px;
+  margin: auto;
+}
+
+.login-area .form-control {
+  border-radius: 25px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.login-area .form-control:focus {
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.login-area .form-label {
+  font-weight: bold;
+}
+
+.login-area .btn-danger {
+  border-radius: 25px;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  background-color: #d2a679;
+  border-color: #d2a679;
+  color: black;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.login-area .btn-danger:hover {
+  background-color: #c4946b;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.login-area .btn-danger:active {
+  background-color: #b5835e;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  transform: translateY(1px);
+}
+
+.login-area .login-button-area {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.register-button {
+  color: #d2a679;
+  border-color: #d2a679;
+  font-weight: bold;
+  background-color: transparent;
+  padding: 0.3rem 1rem;
+  margin-left: 8px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.register-button:hover {
+  color: white;
+  background-color: #d2a679;
+  border-color: #d2a679;
+}

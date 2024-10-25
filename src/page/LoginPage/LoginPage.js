@@ -26,7 +26,7 @@ const Login = () => {
     if (loginError) {
       dispatch(clearErrors());
     }
-  }, [loginError, dispatch]);
+  }, [dispatch]);
 
   const handleLoginWithEmail = (event) => {
     event.preventDefault();
@@ -65,17 +65,24 @@ const Login = () => {
               onChange={(event) => setPassword(event.target.value)}
             />
           </Form.Group>
+          <Button variant="danger" type="submit">
+            Login
+          </Button>
           <div className="display-space-between login-button-area">
-            <Button variant="danger" type="submit">
-              Login
-            </Button>
             <div>
-              아직 계정이 없으세요?<Link to="/register">회원가입 하기</Link>{" "}
+              아직 계정이 없으세요?
+              <Button
+                variant="outline-danger"
+                className="register-button"
+                onClick={() => navigate("/register")}
+              >
+                Register
+              </Button>{" "}
             </div>
           </div>
 
           <div className="text-align-center mt-2">
-            <p>-외부 계정으로 로그인하기-</p>
+            <p>Social Login</p>
             <div className="display-center">
               <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
                 <GoogleLogin
