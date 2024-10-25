@@ -74,7 +74,7 @@ export const loginWithToken = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    user: {},
+    user: null,
     loading: false,
     loginError: null,
     registrationError: null,

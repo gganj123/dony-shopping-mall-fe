@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = "build"         
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://dony-shop-c2563d3d31e6.herokuapp.com/api/:splat"
+  status = 200
