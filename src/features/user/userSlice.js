@@ -24,7 +24,10 @@ export const loginWithGoogle = createAsyncThunk(
   async (token, { rejectWithValue }) => {}
 );
 
-export const logout = () => (dispatch) => {};
+export const logout = () => (dispatch) => {
+  sessionStorage.removeItem("token");
+  dispatch(userSlice.actions.logout());
+};
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (
@@ -84,6 +87,10 @@ const userSlice = createSlice({
     clearErrors: (state) => {
       state.loginError = null;
       state.registrationError = null;
+    },
+    logout: (state) => {
+      state.user = null;
+      state.loginError = null;
     },
   },
   extraReducers: (builder) => {
