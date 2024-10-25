@@ -61,7 +61,14 @@ export const registerUser = createAsyncThunk(
 
 export const loginWithToken = createAsyncThunk(
   "user/loginWithToken",
-  async (_, { rejectWithValue }) => {}
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get("/user/me");
+      return response.data;
+    } catch (error) {
+      rejectWithValue(error.error);
+    }
+  }
 );
 
 const userSlice = createSlice({
@@ -104,6 +111,9 @@ const userSlice = createSlice({
         state.loginError =
           action.payload ||
           "로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요";
+      })
+      .addCase(loginWithToken.fulfilled, (state, action) => {
+        state.user = action.payload.user;
       });
   },
 });
