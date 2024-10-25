@@ -2,8 +2,7 @@ import axios from "axios";
 // 상황따라 주소 다름
 // console.log("proxy", BACKEND_PROXY);
 const api = axios.create({
-  baseURL:
-    process.env.REACT_APP_BACKEND_PROXY || process.env.REACT_APP_LOCAL_BACKEND,
+  baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
     authorization: `Bearer ${sessionStorage.getItem("token")}`,
