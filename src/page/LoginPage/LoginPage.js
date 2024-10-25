@@ -17,10 +17,17 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
+  useEffect(() => {
     if (loginError) {
       dispatch(clearErrors());
     }
-  }, [navigate]);
+  }, [loginError, dispatch]);
+
   const handleLoginWithEmail = (event) => {
     event.preventDefault();
     dispatch(loginWithEmail({ email, password }));
@@ -30,9 +37,6 @@ const Login = () => {
     //구글 로그인 하기
   };
 
-  if (user) {
-    navigate("/");
-  }
   return (
     <>
       <Container className="login-area">
