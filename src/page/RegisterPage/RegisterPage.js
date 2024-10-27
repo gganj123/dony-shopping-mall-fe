@@ -9,6 +9,7 @@ import { registerUser } from "../../features/user/userSlice";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -23,6 +24,7 @@ const RegisterPage = () => {
 
   const register = (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
     const { name, email, password, confirmPassword, policy } = formData;
     const checkConfirmPassword = password === confirmPassword;
     if (!checkConfirmPassword) {
@@ -36,6 +38,7 @@ const RegisterPage = () => {
     setPasswordError("");
     setPolicyError(false);
     dispatch(registerUser({ name, email, password, navigate }));
+    setIsSubmitting(false);
   };
 
   const handleChange = (event) => {
@@ -113,8 +116,8 @@ const RegisterPage = () => {
             isInvalid={policyError}
           />
         </Form.Group>
-        <Button variant="danger" type="submit">
-          Create Account
+        <Button variant="danger" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Creating Account..." : "Create Account"}
         </Button>
       </Form>
     </Container>
