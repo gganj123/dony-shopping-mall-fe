@@ -63,7 +63,9 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(FormData);
+    // setFormData(...formData, stock:{size,});
+    console.log("FormData", formData);
+    if (stock.length === 0) return setStockError(true);
     //재고를 입력했는지 확인, 아니면 에러
     // 재고를 배열에서 객체로 바꿔주기
     // [['M',2]] 에서 {M:2}로
