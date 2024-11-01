@@ -304,7 +304,7 @@ body {
 }
 
 .page-item {
-  margin: 0 5px;
+  margin: 10px 5px;
 }
 
 .page-link {
@@ -397,18 +397,18 @@ body {
   position: absolute;
   width: 100vw;
   left: 70%;
-  animation: move 5s ease-in-out infinite;
+  animation: move 3s ease-in-out infinite;
 }
 
 @keyframes move {
   0% {
     left: 100%;
   }
-  25% {
-    left: 46.5%;
+  10% {
+    left: 44%;
   }
-  75% {
-    left: 46.5%;
+  90% {
+    left: 44%;
   }
   100% {
     left: -100%;
