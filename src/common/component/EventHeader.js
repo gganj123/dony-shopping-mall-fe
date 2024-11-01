@@ -10,7 +10,7 @@ const EventHeader = () => {
         <div
           key={index}
           className="message"
-          style={{ animationDelay: `${index * 3}s` }} // 각 메시지마다 애니메이션 지연 설정
+          style={{ animationDelay: `${index * 4}s` }}
         >
           {message}
         </div>

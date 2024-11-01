@@ -74,7 +74,7 @@ const Navbar = ({ user }) => {
           ))}
         </div>
       </div>
-      <EventHeader />
+      {/* <EventHeader /> */}
 
       <div className="nav-header">
         <div className="nav-title-text">Dony shop</div>

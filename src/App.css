@@ -397,17 +397,17 @@ body {
   position: absolute;
   width: 100vw;
   left: 70%;
-  animation: move 3s ease-in-out infinite;
+  animation: move 4s ease-in-out infinite;
 }
 
 @keyframes move {
   0% {
     left: 100%;
   }
-  10% {
+  20% {
     left: 44%;
   }
-  90% {
+  80% {
     left: 44%;
   }
   100% {
