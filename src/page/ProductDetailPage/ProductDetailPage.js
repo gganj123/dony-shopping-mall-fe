@@ -30,7 +30,7 @@ const ProductDetail = () => {
     dispatch(getProductDetail(id));
   }, [id, dispatch]);
 
-  if (loading || !selectedProduct) {
+  if (loading || !selectedProduct)
     return (
       <ColorRing
         visible={true}
@@ -42,18 +42,25 @@ const ProductDetail = () => {
         colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
       />
     );
-  }
+
   return (
     <Container className="product-detail-card">
       <Row>
         <Col sm={6}>
-          <img src={selectedProduct.image} className="w-100" alt="image" />
+          <img
+            src={selectedProduct.image}
+            style={{ width: "80%", height: "auto", maxWidth: "400px" }}
+            alt="image"
+          />
         </Col>
         <Col className="product-info-area" sm={6}>
           <div className="product-info">{selectedProduct.name}</div>
+          <div class="line"></div>
           <div className="product-info">
             ₩ {currencyFormat(selectedProduct.price)}
           </div>
+          <div class="line"></div>
+
           <div className="product-info">{selectedProduct.description}</div>
 
           <Dropdown

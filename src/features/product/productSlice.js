@@ -27,7 +27,8 @@ export const getProductDetail = createAsyncThunk(
     try {
       const response = await api.get(`/product/${id}`);
       if (response.status !== 200) throw new Error(response.error);
-      return response.data;
+      console.log("Product Detail Response:", response.data);
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(error.error);
     }
