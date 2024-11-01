@@ -7,6 +7,7 @@ import { currencyFormat } from "../../utils/number";
 import "./style/productDetail.style.css";
 import { getProductDetail } from "../../features/product/productSlice";
 import { addToCart } from "../../features/cart/cartSlice";
+import { Spinner } from "react-bootstrap";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -32,15 +33,14 @@ const ProductDetail = () => {
 
   if (loading || !selectedProduct)
     return (
-      <ColorRing
-        visible={true}
-        height="80"
-        width="80"
-        ariaLabel="blocks-loading"
-        wrapperStyle={{}}
-        wrapperClass="blocks-wrapper"
-        colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
-      />
+      <div
+        className="text-align-center empty-bag"
+        style={{ backgroundColor: "#f7f7f7" }}
+      >
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
     );
 
   return (

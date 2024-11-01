@@ -364,6 +364,7 @@ body {
 .nav-title-text {
   font-family: "Diphylleia-Regular", sans-serif;
   font-size: xx-large;
+  cursor: pointer;
   margin-left: 50px;
   font-weight: 600;
 }
@@ -418,4 +419,8 @@ body {
 .line {
   border-top: 1px solid black;
   margin: 20px 0;
+}
+
+.loading {
+  background-color: #f7f7f7;
 }

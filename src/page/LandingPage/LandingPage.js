@@ -41,7 +41,10 @@ const LandingPage = () => {
     <Container>
       <Row>
         {loading ? ( // 로딩 중일 때 Spinner 표시
-          <div className="text-align-center empty-bag">
+          <div
+            className="text-align-center empty-bag loading"
+            style={{ backgroundColor: "#f7f7f7" }}
+          >
             <Spinner animation="border" role="status">
               <span className="visually-hidden">Loading...</span>
             </Spinner>

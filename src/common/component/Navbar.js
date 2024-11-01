@@ -77,7 +77,9 @@ const Navbar = ({ user }) => {
       {/* <EventHeader /> */}
 
       <div className="nav-header">
-        <div className="nav-title-text">Dony shop</div>
+        <div onClick={() => navigate("/")} className="nav-title-text" >
+          Dony shop
+        </div>
         <div className="burger-menu hide">
           <FontAwesomeIcon icon={faBars} onClick={() => setWidth(250)} />
         </div>
