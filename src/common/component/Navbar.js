@@ -6,11 +6,13 @@ import {
   faBox,
   faSearch,
   faShoppingBag,
+  faUserShield,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/user/userSlice";
+import EventHeader from "./EventHeader";
 
 const Navbar = ({ user }) => {
   const dispatch = useDispatch();
@@ -18,14 +20,13 @@ const Navbar = ({ user }) => {
   const isMobile = window.navigator.userAgent.indexOf("Mobile") !== -1;
   const [showSearchBox, setShowSearchBox] = useState(false);
   const menuList = [
-    "여성",
-    "Divided",
-    "남성",
-    "신생아/유아",
-    "아동",
-    "H&M HOME",
-    "Sale",
-    "지속가능성",
+    "BEST 50",
+    "NEW",
+    "TOP",
+    "PANTS",
+    "OUTER",
+    "ACCESSORY",
+    "SALE",
   ];
   let [width, setWidth] = useState(0);
   let navigate = useNavigate();
@@ -73,18 +74,27 @@ const Navbar = ({ user }) => {
           ))}
         </div>
       </div>
-      {user && user.level === "admin" && (
-        <Link to="/admin/product?page=1" className="link-area">
-          Admin page
-        </Link>
-      )}
+      <EventHeader />
+
       <div className="nav-header">
+        <div className="nav-title-text">Dony shop</div>
         <div className="burger-menu hide">
           <FontAwesomeIcon icon={faBars} onClick={() => setWidth(250)} />
         </div>
 
         <div>
           <div className="display-flex">
+            <div
+              onClick={() => navigate("/admin/product?page=1")}
+              className="nav-icon"
+            >
+              {user && user.level === "admin" && (
+                <>
+                  <FontAwesomeIcon icon={faUserShield} />
+                  <span style={{ cursor: "pointer" }}>관리자 페이지</span>
+                </>
+              )}
+            </div>
             {user ? (
               <div onClick={handleLogout} className="nav-icon">
                 <FontAwesomeIcon icon={faUser} />
@@ -123,14 +133,12 @@ const Navbar = ({ user }) => {
       </div>
 
       <div className="nav-logo">
-        <Link to="/">
-          <img width={250} src="/image/dony-logo.png" alt="dony-logo.png" />
-        </Link>
+        <div className="main-slogan">" 패션의 시작은 여기서 "</div>
       </div>
       <div className="nav-menu-area">
         <ul className="menu">
           {menuList.map((menu, index) => (
-            <li key={index}>
+            <li className="li_menu" key={index}>
               <a href="#">{menu}</a>
             </li>
           ))}

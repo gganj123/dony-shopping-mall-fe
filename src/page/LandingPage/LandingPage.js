@@ -5,11 +5,15 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductList } from "../../features/product/productSlice";
 import ReactPaginate from "react-paginate";
+import { Spinner } from "react-bootstrap";
+import "../../App.css";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { productList, totalPageNum } = useSelector((state) => state.product);
+  const { productList, totalPageNum, loading } = useSelector(
+    (state) => state.product
+  );
 
   const [query, setQuery] = useSearchParams();
   const name = query.get("name") || "";
@@ -36,7 +40,13 @@ const LandingPage = () => {
   return (
     <Container>
       <Row>
-        {productList.length > 0 ? (
+        {loading ? ( // 로딩 중일 때 Spinner 표시
+          <div className="text-align-center empty-bag">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        ) : productList.length > 0 ? (
           productList.map((item) => (
             <Col md={3} sm={12} key={item._id}>
               <ProductCard item={item} />
@@ -53,12 +63,12 @@ const LandingPage = () => {
         )}
       </Row>
       <ReactPaginate
-        nextLabel="next >"
+        nextLabel=">"
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={totalPageNum}
         forcePage={page - 1}
-        previousLabel="< previous"
+        previousLabel="<"
         renderOnZeroPageCount={null}
         pageClassName="page-item"
         pageLinkClassName="page-link"
