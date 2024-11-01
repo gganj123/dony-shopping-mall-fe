@@ -30,7 +30,7 @@ const ProductDetail = () => {
     dispatch(getProductDetail(id));
   }, [id, dispatch]);
 
-  if (loading || !selectedProduct)
+  if (loading || !selectedProduct) {
     return (
       <ColorRing
         visible={true}
@@ -42,6 +42,7 @@ const ProductDetail = () => {
         colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
       />
     );
+  }
   return (
     <Container className="product-detail-card">
       <Row>
