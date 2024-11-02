@@ -77,7 +77,7 @@ const Navbar = ({ user }) => {
       {/* <EventHeader /> */}
 
       <div className="nav-header">
-        <div onClick={() => navigate("/")} className="nav-title-text" >
+        <div onClick={() => navigate("/")} className="nav-title-text">
           Dony shop
         </div>
         <div className="burger-menu hide">
