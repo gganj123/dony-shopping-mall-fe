@@ -3,14 +3,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { showToastMessage } from "../common/uiSlice";
 import api from "../../utils/api";
 import { initialCart } from "../cart/cartSlice";
+import { getCartList } from "../cart/cartSlice";
 
 export const loginWithEmail = createAsyncThunk(
   "user/loginWithEmail",
-  async ({ email, password }, { rejectWithValue }) => {
+
+  async ({ email, password }, thunkAPI) => {
+    const { rejectWithValue, dispatch } = thunkAPI;
     try {
       const response = await api.post("/auth/login", { email, password });
       sessionStorage.setItem("token", response.data.token);
       //loginPage 성공할떄 navigate처리
+      dispatch(getCartList());
       return response.data;
     } catch (error) {
       //실패 시 생긴 에러값을 reducer에 저장

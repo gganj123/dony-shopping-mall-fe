@@ -97,6 +97,7 @@ const cartSlice = createSlice({
       state.error = "";
       state.cartList = action.payload.data.items;
       console.log(state.cartList);
+      state.cartItemCount = action.payload.data.items.length; // 아이템 수로 cartItemCount 업데이트
     });
     builder.addCase(getCartList.rejected, (state, action) => {
       state.loading = false;
