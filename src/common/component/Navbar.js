@@ -142,9 +142,7 @@ const Navbar = ({ user }) => {
         </div>
       </div>
 
-      <div className="nav-logo">
-        <div className="main-slogan">" 패션의 시작은 여기서 "</div>
-      </div>
+      {/* <div className="nav-logo"></div> */}
       <div className="nav-menu-area">
         <ul className="menu">
           {menuList.map((menu, index) => (
