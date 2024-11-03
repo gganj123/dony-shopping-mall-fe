@@ -57,7 +57,11 @@ export const deleteCartItem = createAsyncThunk(
     try {
       const response = await api.delete(`/cart/${id}`);
       if (response.status !== 200) throw new Error(response.error);
-      //TODO 딜렉트중
+
+      dispatch(
+        showToastMessage({ message: "상품 삭제 완료", status: "success" })
+      );
+      dispatch(getCartList());
     } catch (error) {
       return rejectWithValue(error.error);
     }
@@ -109,10 +113,20 @@ const cartSlice = createSlice({
         (total, item) => total + item.productId.price * item.qty,
         0
       );
-      // console.log(state.cartList);
       state.cartItemCount = action.payload.data.items.length; // 아이템 수로 cartItemCount 업데이트
     });
     builder.addCase(getCartList.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(deleteCartItem.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteCartItem.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = "";
+    });
+    builder.addCase(deleteCartItem.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

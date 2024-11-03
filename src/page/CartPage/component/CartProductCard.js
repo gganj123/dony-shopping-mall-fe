@@ -38,7 +38,7 @@ const CartProductCard = ({ item }) => {
             <strong> {currencyFormat(item.productId.price)}</strong>
           </div>
           <div>Size: {item.size}</div>
-          <div>Total:  {currencyFormat(item.productId.price * item.qty)}</div>
+          <div>Total: {currencyFormat(item.productId.price * item.qty)}</div>
           <div>
             Quantity:
             <Form.Select
