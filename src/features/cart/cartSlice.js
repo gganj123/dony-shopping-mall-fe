@@ -70,10 +70,11 @@ export const deleteCartItem = createAsyncThunk(
 
 export const updateQty = createAsyncThunk(
   "cart/updateQty",
-  async ({ id, value }, { rejectWithValue }) => {
+  async ({ id, value }, { rejectWithValue, dispatch }) => {
     try {
       const response = await api.put(`/cart/${id}`, { qty: value });
       if (response.status !== 200) throw new Error(response.error);
+      dispatch(getCartList());
       return response.data;
     } catch (error) {
       return rejectWithValue(error.error);
@@ -145,13 +146,7 @@ const cartSlice = createSlice({
       state.loading = false;
       state.error = "";
       const updatedItem = action.payload;
-
-      const index = state.cartList.findIndex(
-        (item) => item._id === updatedItem._id
-      );
-      if (index !== -1) {
-        state.cartList[index] = updatedItem; // cartList에서 해당 아이템을 업데이트
-      }
+      //TODO 여기부터 수정
     });
     builder.addCase(updateQty.rejected, (state, action) => {
       state.loading = false;
