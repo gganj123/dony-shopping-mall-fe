@@ -65,7 +65,7 @@ const ProductDetail = () => {
           <div className="product-info">{selectedProduct.name}</div>
           <div className="line"></div>
           <div className="product-info">
-            ₩ {currencyFormat(selectedProduct.price)}
+            {currencyFormat(selectedProduct.price)}
           </div>
           <div class="line"></div>
 

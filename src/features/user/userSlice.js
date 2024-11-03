@@ -14,7 +14,6 @@ export const loginWithEmail = createAsyncThunk(
       const response = await api.post("/auth/login", { email, password });
       sessionStorage.setItem("token", response.data.token);
       //loginPage 성공할떄 navigate처리
-      dispatch(getCartList());
       return response.data;
     } catch (error) {
       //실패 시 생긴 에러값을 reducer에 저장

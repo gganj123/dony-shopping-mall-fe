@@ -14,13 +14,15 @@ const OrderReceipt = ({ cartList, totalPrice }) => {
       <ul className="receipt-list">
         {cartList.length > 0 &&
           cartList.map((item, index) => {
-            <li key={index}>
-              <div className="display-flex space-between">
-                <div>{item.productId.name}</div>
+            return (
+              <li key={index}>
+                <div className="display-flex space-between">
+                  <div>{item.productId.name}</div>
 
-                <div>{item.productId.price * item.qty}</div>
-              </div>
-            </li>;
+                  <div>{currencyFormat(item.productId.price * item.qty)}</div>
+                </div>
+              </li>
+            );
           })}
       </ul>
       <div className="display-flex space-between receipt-title">
@@ -28,10 +30,10 @@ const OrderReceipt = ({ cartList, totalPrice }) => {
           <strong>Total:</strong>
         </div>
         <div>
-          <strong>{totalPrice}</strong>
+          <strong>{currencyFormat(totalPrice)}</strong>
         </div>
       </div>
-      {/* {location.pathname.includes("/cart") && cartList.length > 0 && (
+      {location.pathname.includes("/cart") && cartList.length > 0 && (
         <Button
           variant="dark"
           className="payment-button"
@@ -39,7 +41,7 @@ const OrderReceipt = ({ cartList, totalPrice }) => {
         >
           결제 계속하기
         </Button>
-      )} */}
+      )}
 
       <div>
         가능한 결제 수단 귀하가 결제 단계에 도달할 때까지 가격 및 배송료는
