@@ -63,7 +63,7 @@ const ProductDetail = () => {
         </Col>
         <Col className="product-info-area" sm={6}>
           <div className="product-info">{selectedProduct.name}</div>
-          <div class="line"></div>
+          <div className="line"></div>
           <div className="product-info">
             ₩ {currencyFormat(selectedProduct.price)}
           </div>

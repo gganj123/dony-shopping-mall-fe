@@ -53,7 +53,15 @@ export const getCartList = createAsyncThunk(
 
 export const deleteCartItem = createAsyncThunk(
   "cart/deleteCartItem",
-  async (id, { rejectWithValue, dispatch }) => {}
+  async (id, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await api.delete(`/cart/${id}`);
+      if (response.status !== 200) throw new Error(response.error);
+      //TODO 딜렉트중
+    } catch (error) {
+      return rejectWithValue(error.error);
+    }
+  }
 );
 
 export const updateQty = createAsyncThunk(
@@ -97,6 +105,11 @@ const cartSlice = createSlice({
       state.error = "";
       state.cartList = action.payload.data.items;
       console.log(state.cartList);
+      state.totalPrice = action.payload.data.items.reduce(
+        (total, item) => total + item.productId.price * item.qty,
+        0
+      );
+      // console.log(state.cartList);
       state.cartItemCount = action.payload.data.items.length; // 아이템 수로 cartItemCount 업데이트
     });
     builder.addCase(getCartList.rejected, (state, action) => {
