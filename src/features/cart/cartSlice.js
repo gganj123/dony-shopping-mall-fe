@@ -127,6 +127,7 @@ const cartSlice = createSlice({
     builder.addCase(getCartList.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
+      state.cartItemCount = 0;
     });
     builder.addCase(deleteCartItem.pending, (state, action) => {
       state.loading = true;

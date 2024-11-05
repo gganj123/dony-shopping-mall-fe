@@ -48,6 +48,7 @@ const Navbar = ({ user }) => {
   };
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(getCartList());
   };
   return (
     <div>
