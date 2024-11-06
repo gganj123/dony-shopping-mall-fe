@@ -45,11 +45,11 @@ const PaymentPage = () => {
         totalPrice,
         shipTo: { address, city, zip },
         contact: { firstName, lastName, contact },
-        OrderList: cartList.map((item) => {
+        orderList: cartList.map((item) => {
           return {
             productId: item.productId._id,
             price: item.productId.price,
-            qty: item.productId.qty,
+            qty: item.qty,
             size: item.size,
           };
         }),
