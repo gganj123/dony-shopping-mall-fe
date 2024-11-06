@@ -86,7 +86,7 @@ export const getCartQty = createAsyncThunk(
   "cart/getCartQty",
   async (_, { rejectWithValue, dispatch }) => {
     try {
-      const response = api.get("cart/qty");
+      const response = await api.get("cart/qty");
       if (response.status !== 200) throw new Error(response.error);
       return response.data.qty;
     } catch (error) {
@@ -166,8 +166,8 @@ const cartSlice = createSlice({
     });
     builder.addCase(getCartQty.fulfilled, (state, action) => {
       state.loading = false;
-      state.cartItemCount = action.payload;
       state.error = "";
+      state.cartItemCount = action.payload;
     });
     builder.addCase(getCartQty.rejected, (state, action) => {
       state.loading = false;
