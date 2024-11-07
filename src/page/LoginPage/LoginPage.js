@@ -38,6 +38,7 @@ const Login = () => {
     //구글 로그인 하기
 
     dispatch(loginWithGoogle(googleData.credential));
+    navigate("/");
   };
 
   return (
