@@ -1,12 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Row, Col, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
 import { currencyFormat } from "../../../utils/number";
 import { updateQty, deleteCartItem } from "../../../features/cart/cartSlice";
+import { showToastMessage } from "../../../features/common/uiSlice";
+
 const CartProductCard = ({ item }) => {
   const dispatch = useDispatch();
+  const stock = { ...item.productId.stock };
+  const stockCount = stock[item.size];
+  useEffect(() => {
+    if (item.qty > stockCount && stockCount > 0) {
+      dispatch(
+        showToastMessage({
+          message: `${item.productId.name}의 재고가 고객님이 선택하신 수량보다 적습니다. 수량을 다시 선택해주세요.`,
+          status: "warning",
+        })
+      );
+    }
+  }, [item.qty, stockCount, item.productId.name, dispatch]);
+
+  useEffect(() => {
+    if (stockCount === 0) {
+      dispatch(
+        showToastMessage({
+          message: `${item.productId.name}이 품절되었습니다.`,
+          status: "warning",
+        })
+      );
+    }
+  }, [stockCount, item.productId.name, dispatch]);
 
   const handleQtyChange = (id, value) => {
     dispatch(updateQty({ id, value }));
@@ -15,8 +40,6 @@ const CartProductCard = ({ item }) => {
   const deleteCart = (id) => {
     dispatch(deleteCartItem(id));
   };
-  const stock = { ...item.productId.stock };
-  const stockCount = stock[item.size];
 
   return (
     <div className="product-card-cart">
@@ -42,30 +65,32 @@ const CartProductCard = ({ item }) => {
           <div>Size: {item.size}</div>
           <div>Total: {currencyFormat(item.productId.price * item.qty)}</div>
           <div>
-            Quantity:
+            Quantity:{" "}
+            {item.qty > stockCount ? (
+              <p className="rechoice">
+                재고가 얼마 남지않았습니다. 수량을 다시 선택해주세요!
+              </p>
+            ) : (
+              ""
+            )}
             <Form.Select
               onChange={(event) =>
-                handleQtyChange(item._id, event.target.value)
+                handleQtyChange(item._id, Number(event.target.value))
               }
               required
-              defaultValue={item.qty}
+              defaultValue={item.qty > stockCount ? 0 : item.qty} // 선택된 수량이 재고보다 많으면 기본값을 0으로 설정
               className="qty-dropdown"
+              disabled={stockCount === 0} // 재고가 0일 때 선택 불가
             >
-              {[...Array(stockCount)].map((_, index) => (
-                <option key={index + 1} value={index + 1}>
-                  {index + 1}
-                </option>
-              ))}
-              {/* <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-              <option value={4}>4</option>
-              <option value={5}>5</option>
-              <option value={6}>6</option>
-              <option value={7}>7</option>
-              <option value={8}>8</option>
-              <option value={9}>9</option>
-              <option value={10}>10</option> */}
+              {stockCount === 0 ? (
+                <option>품절되었습니다</option>
+              ) : (
+                [...Array(stockCount)].map((_, index) => (
+                  <option key={index + 1} value={index + 1}>
+                    {index + 1}
+                  </option>
+                ))
+              )}
             </Form.Select>
           </div>
         </Col>

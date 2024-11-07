@@ -124,7 +124,13 @@ const cartSlice = createSlice({
     builder.addCase(getCartList.fulfilled, (state, action) => {
       state.loading = false;
       state.error = "";
-      state.cartList = action.payload.data.items;
+      state.cartList = action.payload.data.items.map((item) => {
+        const stockCount = item.productId.stock[item.size] || 0;
+        return {
+          ...item,
+          qty: stockCount === 0 ? 0 : item.qty, // 재고가 0인 경우 수량도 0으로 설정
+        };
+      });
       console.log(state.cartList);
       state.totalPrice = action.payload.data.items.reduce(
         (total, item) => total + item.productId.price * item.qty,
