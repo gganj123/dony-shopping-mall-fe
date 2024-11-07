@@ -26,17 +26,9 @@ export const loginWithGoogle = createAsyncThunk(
   "user/loginWithGoogle",
   async (token, { rejectWithValue }) => {
     try {
-      const response = await api.post(
-        "/auth/google",
-        { token },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Bearer 토큰을 Authorization 헤더에 추가
-          },
-        }
-      );
+      const response = await api.post("/auth/google", { token });
       sessionStorage.setItem("token", response.data.token);
-      return response.data.user;
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
