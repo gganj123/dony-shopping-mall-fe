@@ -33,6 +33,7 @@ const RegisterPage = () => {
     }
     if (!policy) {
       setPolicyError(true);
+      setIsSubmitting(false);
       return;
     }
     setPasswordError("");
