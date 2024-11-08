@@ -21,7 +21,6 @@ export const createOrder = createAsyncThunk(
   async (payload, { dispatch, rejectWithValue }) => {
     try {
       const response = await api.post("/order", payload);
-      if (response.status !== 200) throw new Error(response.error);
       dispatch(getCartQty());
       return response.data.orderNum;
     } catch (error) {
@@ -36,7 +35,6 @@ export const getOrder = createAsyncThunk(
   async (_, { rejectWithValue, dispatch }) => {
     try {
       const response = await api.get("order/user");
-      if (response.status !== 200) throw new Error(response.error);
       return response.data;
     } catch (error) {
       dispatch(showToastMessage({ message: error.error, status: "error" }));
@@ -50,7 +48,6 @@ export const getOrderList = createAsyncThunk(
   async (query, { rejectWithValue, dispatch }) => {
     try {
       const response = await api.get(`/order/admin/`, { params: query });
-      if (response.status !== 200) throw new Error(response.error);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.error);
@@ -66,7 +63,6 @@ export const updateOrder = createAsyncThunk(
         orderId: id,
         status,
       });
-      if (response.status !== 200) throw new Error(response.error);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.error);
