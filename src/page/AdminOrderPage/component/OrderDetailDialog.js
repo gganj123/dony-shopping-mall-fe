@@ -3,7 +3,7 @@ import { Form, Modal, Button, Col, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { ORDER_STATUS } from "../../../constants/order.constants";
 import { currencyFormat } from "../../../utils/number";
-import { updateOrder } from "../../../features/order/orderSlice";
+import { getOrderList, updateOrder } from "../../../features/order/orderSlice";
 
 const OrderDetailDialog = ({ open, handleClose }) => {
   const selectedOrder = useSelector((state) => state.order.selectedOrder);
