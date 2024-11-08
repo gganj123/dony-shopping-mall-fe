@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getCartList, getCartQty } from "../cart/cartSlice";
 import api from "../../utils/api";
 import { showToastMessage } from "../common/uiSlice";
+import { cat } from "@cloudinary/url-gen/qualifiers/focusOn";
+import { act } from "react";
 
 // Define initial state
 const initialState = {
@@ -45,7 +47,15 @@ export const getOrder = createAsyncThunk(
 
 export const getOrderList = createAsyncThunk(
   "order/getOrderList",
-  async (query, { rejectWithValue, dispatch }) => {}
+  async (query, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await api.get(`/order/admin/${query}`);
+      if (response.status !== 200) throw new Error(response.error);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.error);
+    }
+  }
 );
 
 export const updateOrder = createAsyncThunk(
@@ -89,6 +99,21 @@ const orderSlice = createSlice({
     builder.addCase(getOrder.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
+      state.orderList = "";
+    });
+    builder.addCase(getOrderList.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getOrderList.fulfilled, (state, action) => {
+      state.loading = false;
+      state.orderList = action.payload.data;
+      console.log(state.orderList);
+      state.error = "";
+    });
+    builder.addCase(getOrderList.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+      state.orderList = "";
     });
   },
 });
