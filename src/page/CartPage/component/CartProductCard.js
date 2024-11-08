@@ -78,18 +78,26 @@ const CartProductCard = ({ item }) => {
                 handleQtyChange(item._id, Number(event.target.value))
               }
               required
-              defaultValue={item.qty > stockCount ? 0 : item.qty} // 선택된 수량이 재고보다 많으면 기본값을 0으로 설정
+              defaultValue={item.qty}
               className="qty-dropdown"
-              disabled={stockCount === 0} // 재고가 0일 때 선택 불가
+              disabled={stockCount === 0}
             >
               {stockCount === 0 ? (
                 <option>품절되었습니다</option>
               ) : (
-                [...Array(stockCount)].map((_, index) => (
-                  <option key={index + 1} value={index + 1}>
-                    {index + 1}
-                  </option>
-                ))
+                <>
+                  {/* 사용자가 선택한 수량(item.qty)이 재고(stockCount)보다 크면 그 수량을 옵션에 추가 */}
+                  {item.qty > stockCount && (
+                    <option value={item.qty}>
+                      {item.qty} [남은 재고 : {stockCount}]
+                    </option>
+                  )}
+                  {[...Array(stockCount)].map((_, index) => (
+                    <option key={index + 1} value={index + 1}>
+                      {index + 1}
+                    </option>
+                  ))}
+                </>
               )}
             </Form.Select>
           </div>
