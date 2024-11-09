@@ -43,7 +43,7 @@ const ProductDetail = () => {
     return (
       <div
         className="text-align-center empty-bag"
-        style={{ backgroundColor: "#f7f7f7" }}
+        style={{ backgroundColor: "#ffffff" }}
       >
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
