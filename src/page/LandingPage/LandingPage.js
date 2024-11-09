@@ -7,6 +7,7 @@ import { getProductList } from "../../features/product/productSlice";
 import ReactPaginate from "react-paginate";
 import { Spinner } from "react-bootstrap";
 import "../../App.css";
+import Banner from "../../common/component/banner";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -18,8 +19,13 @@ const LandingPage = () => {
   const [query, setQuery] = useSearchParams();
   const name = query.get("name") || "";
   const page = Number(query.get("page")) || 1;
+  const category = query.get("category") || "";
 
-  const [searchQuery, setSearchQuery] = useState({ page, name });
+  const [searchQuery, setSearchQuery] = useState({
+    page,
+    name,
+    category,
+  });
 
   // 상품 리스트 가져오기
   useEffect(() => {
@@ -28,7 +34,7 @@ const LandingPage = () => {
 
   // 쿼리가 바뀔 때마다 searchQuery 상태 업데이트
   useEffect(() => {
-    setSearchQuery({ page, name });
+    setSearchQuery({ page, name, category });
   }, [query]);
 
   // 페이지 변경 시 쿼리 업데이트
@@ -39,6 +45,12 @@ const LandingPage = () => {
 
   return (
     <Container>
+      {!category && <Banner />}
+      {category && (
+        <div className="category-header">
+          <h2>{category.toUpperCase()}</h2>
+        </div>
+      )}
       <Row>
         {loading ? ( // 로딩 중일 때 Spinner 표시
           <div

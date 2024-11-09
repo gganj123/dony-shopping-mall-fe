@@ -20,15 +20,7 @@ const Navbar = ({ user }) => {
   const { cartItemCount } = useSelector((state) => state.cart);
   const isMobile = window.navigator.userAgent.indexOf("Mobile") !== -1;
   const [showSearchBox, setShowSearchBox] = useState(false);
-  const menuList = [
-    "BEST 50",
-    "NEW",
-    "TOP",
-    "PANTS",
-    "OUTER",
-    "ACCESSORY",
-    "SALE",
-  ];
+  const menuList = ["NEW", "TOP", "PANTS", "OUTER", "ACCESSORY"];
   let [width, setWidth] = useState(0);
   let navigate = useNavigate();
 
@@ -46,6 +38,11 @@ const Navbar = ({ user }) => {
       navigate(`?name=${event.target.value}`);
     }
   };
+
+  const handleCategoryClick = (category) => {
+    navigate(`/?category=${category.toLowerCase()}`);
+  };
+
   const handleLogout = () => {
     dispatch(logout());
     dispatch(getCartList());
@@ -59,7 +56,7 @@ const Navbar = ({ user }) => {
               <FontAwesomeIcon className="search-icon" icon={faSearch} />
               <input
                 type="text"
-                placeholder="제품검색"
+                placeholder="Search"
                 onKeyPress={onCheckEnter}
               />
             </div>
@@ -83,7 +80,7 @@ const Navbar = ({ user }) => {
           ))}
         </div>
       </div>
-      {/* <EventHeader /> */}
+      <EventHeader />
 
       <div className="nav-header">
         <div onClick={() => navigate("/")} className="nav-title-text">
@@ -148,18 +145,23 @@ const Navbar = ({ user }) => {
         <ul className="menu">
           {menuList.map((menu, index) => (
             <li className="li_menu" key={index}>
-              <a href="#">{menu}</a>
+              <button
+                onClick={() => handleCategoryClick(menu)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {menu}
+              </button>{" "}
             </li>
           ))}
         </ul>
         {!isMobile && ( // admin페이지에서 같은 search-box스타일을 쓰고있음 그래서 여기서 서치박스 안보이는것 처리를 해줌
           <div className="search-box landing-search-box ">
             <FontAwesomeIcon icon={faSearch} />
-            <input
-              type="text"
-              placeholder="제품검색"
-              onKeyPress={onCheckEnter}
-            />
+            <input type="text" placeholder="Search" onKeyPress={onCheckEnter} />
           </div>
         )}
       </div>
